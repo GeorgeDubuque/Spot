@@ -1,5 +1,7 @@
 package com.georgedubuque.spot
 
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -7,6 +9,7 @@ import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
+import com.georgedubuque.spot.R.layout.activity_spot
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -23,6 +26,7 @@ class Map : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient : FusedLocationProviderClient
     private lateinit var lastLocation : Location
     private lateinit var mDrawerLayout: DrawerLayout
+    private val ADD_SPOT_INTENT = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +44,7 @@ class Map : AppCompatActivity(), OnMapReadyCallback {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
             menuItem.isChecked = true
+
             // close drawer when item is tapped
             mDrawerLayout.closeDrawers()
 
@@ -83,11 +88,32 @@ class Map : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
         mMap.setOnMapLongClickListener { latLng ->
-            googleMap.addMarker(MarkerOptions()
-                    .position(latLng)
-                    .title("Your marker title")
-                    .snippet("Your marker snippet"))
+
+            val intent = Intent(this,activity_spot::class.java)
+            intent.putExtra("latLng",latLng)
+            startActivityForResult(intent,ADD_SPOT_INTENT)
+
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == ADD_SPOT_INTENT){
+
+            if(resultCode == Activity.RESULT_OK){
+                val spot : Spot = data?.getSerializableExtra("spot") as Spot
+                placeMarker(spot)
+            }
+        }
+    }
+
+    fun placeMarker(spot : Spot){
+
+        mMap.addMarker(MarkerOptions()
+                .position(spot.latLng)
+                .title(spot.name)
+                .snippet(spot.type))
     }
 
     companion object {
