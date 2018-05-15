@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Spot</string>
     <string name="title_activity_map">Map</string>
+
+    <string-array name="spot_types">
+        <item>Ledge</item>
+        <item>Rail</item>
+        <item>Skatepark</item>
+        <item>Stairs</item>
+        <item>Transition</item>
+        <item>Hill</item>
+        <item>Other</item>
+    </string-array>
 </resources>

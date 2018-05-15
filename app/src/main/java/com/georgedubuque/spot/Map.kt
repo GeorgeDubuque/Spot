@@ -9,7 +9,8 @@ import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
-import com.georgedubuque.spot.R.layout.activity_spot
+import com.georgedubuque.spot.R.layout.activity_add_spot
+import com.georgedubuque.spot.R.layout.activity_spot_map
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -89,8 +90,9 @@ class Map : AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
         mMap.setOnMapLongClickListener { latLng ->
 
-            val intent = Intent(this,activity_spot::class.java)
-            intent.putExtra("latLng",latLng)
+            val intent = Intent(this, AddSpot::class.java)
+            intent.putExtra("lat",latLng.latitude)
+            intent.putExtra("lng",latLng.longitude)
             startActivityForResult(intent,ADD_SPOT_INTENT)
 
         }
@@ -102,6 +104,7 @@ class Map : AppCompatActivity(), OnMapReadyCallback {
         if(requestCode == ADD_SPOT_INTENT){
 
             if(resultCode == Activity.RESULT_OK){
+                print("we have returned from activity spot")
                 val spot : Spot = data?.getSerializableExtra("spot") as Spot
                 placeMarker(spot)
             }
@@ -110,8 +113,10 @@ class Map : AppCompatActivity(), OnMapReadyCallback {
 
     fun placeMarker(spot : Spot){
 
+        val latLng = LatLng(spot.lat,spot.lng)
+
         mMap.addMarker(MarkerOptions()
-                .position(spot.latLng)
+                .position(latLng)
                 .title(spot.name)
                 .snippet(spot.type))
     }
