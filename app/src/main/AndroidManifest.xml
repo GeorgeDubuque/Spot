@@ -44,7 +44,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddSpot"></activity>
+        <activity android:name=".AddSpot" />
+        <activity android:name=".SpotInfo" />
+        <activity android:name=".SpotList" />
     </application>
 
 </manifest>
