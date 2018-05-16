@@ -8,6 +8,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.georgedubuque.spot.R.layout.fragment_spot_list_item
+import kotlinx.android.synthetic.main.activity_add_spot.*
+import kotlinx.android.synthetic.main.fragment_spot_list_item.*
+import kotlinx.android.synthetic.main.fragment_spot_list_item.view.*
 
 
 /**
@@ -48,7 +52,11 @@ class SpotListItem : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_spot_list_item, container, false)
+        val view = inflater.inflate(R.layout.fragment_spot_list_item, container, false)
+        view.spot_name.text = spotName
+        view.spot_type.text = spotType
+        view.spot_rating.rating = spotRating.toFloat()
+        return view
     }
 
      //TODO: Rename method, update argument and hook method into UI event
