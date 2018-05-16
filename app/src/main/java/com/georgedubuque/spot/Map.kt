@@ -11,6 +11,7 @@ import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
+import com.georgedubuque.spot.R.layout.activity_spot_list
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -48,6 +49,13 @@ class Map : AppCompatActivity(), OnMapReadyCallback {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
             menuItem.isChecked = true
+
+            if(menuItem.title == "Spots"){
+
+                mDrawerLayout.closeDrawers()
+                val intent = Intent(this,SpotList::class.java)
+                startActivity(intent)
+            }
 
             // close drawer when item is tapped
             mDrawerLayout.closeDrawers()

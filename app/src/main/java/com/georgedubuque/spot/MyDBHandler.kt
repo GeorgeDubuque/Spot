@@ -84,6 +84,31 @@ class MyDBHandler(context: Context,
         return spot
     }
 
+    fun getSpots() : ArrayList<Spot>{
+
+        val spots = ArrayList<Spot>()
+        val query = ("Select * FROM "
+                + TABLE_SPOTS)
+
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(query,null)
+        var spot: Spot? = Spot()
+
+        while(cursor.moveToNext()){
+
+            spot!!.setId(cursor.getString(0).toInt())
+            spot!!.name = cursor.getString(1)
+            spot!!.type = cursor.getString(2)
+            spot!!.typeNum = cursor.getInt(3)
+            spot!!.rating = cursor.getFloat(4)
+            spot!!.lat = cursor.getDouble(5)
+            spot!!.lng = cursor.getDouble(6)
+            spots.add(spot)
+        }
+
+        return spots
+    }
+
     fun deleteSpot(spotname: String): Boolean {
         var result = false
         val query = ("Select * FROM " + TABLE_SPOTS + " WHERE "
