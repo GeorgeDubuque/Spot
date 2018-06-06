@@ -7,25 +7,26 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SpotList">
-
-    <ScrollView
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        tools:context=".SpotList">
 
-        <LinearLayout
-            android:id="@+id/spot_list"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-</android.support.constraint.ConstraintLayout>
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/spot_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
+    </android.support.constraint.ConstraintLayout>
 
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
     <android.support.design.widget.NavigationView
@@ -34,6 +35,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/drawer_view"/>
+        app:itemBackground="@color/gray"
+        app:itemTextColor="@color/colorPrimaryDark"
+        app:menu="@menu/drawer_view" />
 
 </android.support.v4.widget.DrawerLayout>

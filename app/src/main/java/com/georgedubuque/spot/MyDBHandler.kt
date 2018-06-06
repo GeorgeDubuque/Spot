@@ -5,6 +5,13 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
+
+/*
+purpose:    handles pulling and pushing data to the database, able to insert, delete, search and get
+            all objects from the database
+source:     Jianna Zhang SQLite Database example and George Dubuque
+ */
 
 class MyDBHandler(context: Context,
                   name: String?,
@@ -23,6 +30,8 @@ class MyDBHandler(context: Context,
                 + " TEXT,"
                 + COLUMN_SPOTNUM
                 + " INTEGER,"
+                + COLUMN_IMG
+                + " TEXT,"
                 + COLUMN_RATING
                 + " INTEGER,"
                 + COLUMN_LAT
@@ -45,6 +54,7 @@ class MyDBHandler(context: Context,
         values.put(COLUMN_SPOTNAME, spot.name)
         values.put(COLUMN_SPOTYPE, spot.type)
         values.put(COLUMN_SPOTNUM, spot.typeNum)
+        values.put(COLUMN_IMG, spot.img)
         values.put(COLUMN_RATING, spot.rating)
         values.put(COLUMN_LAT, spot.lat)
         values.put(COLUMN_LNG, spot.lng)
@@ -72,9 +82,10 @@ class MyDBHandler(context: Context,
             spot!!.name = cursor.getString(1)
             spot!!.type = cursor.getString(2)
             spot!!.typeNum = cursor.getInt(3)
-            spot!!.rating = cursor.getFloat(4)
-            spot!!.lat = cursor.getDouble(5)
-            spot!!.lng = cursor.getDouble(6)
+            spot!!.img = cursor.getString(4)
+            spot!!.rating = cursor.getFloat(5)
+            spot!!.lat = cursor.getDouble(6)
+            spot!!.lng = cursor.getDouble(7)
 
             cursor.close()
         } else {
@@ -92,18 +103,26 @@ class MyDBHandler(context: Context,
 
         val db = this.writableDatabase
         val cursor = db.rawQuery(query,null)
-        var spot: Spot? = Spot()
+        var spot = Spot()
 
         while(cursor.moveToNext()){
 
+            spot = Spot()
             spot!!.setId(cursor.getString(0).toInt())
             spot!!.name = cursor.getString(1)
+            Log.d("found spot",spot.name)
             spot!!.type = cursor.getString(2)
             spot!!.typeNum = cursor.getInt(3)
-            spot!!.rating = cursor.getFloat(4)
-            spot!!.lat = cursor.getDouble(5)
-            spot!!.lng = cursor.getDouble(6)
+            spot!!.img = cursor.getString(4)
+            spot!!.rating = cursor.getFloat(5)
+            spot!!.lat = cursor.getDouble(6)
+            spot!!.lng = cursor.getDouble(7)
             spots.add(spot)
+        }
+
+        for(i in spots.indices){
+
+            Log.d("repeating spots found", spots[i].name)
         }
 
         return spots
@@ -128,7 +147,7 @@ class MyDBHandler(context: Context,
     }
 
     companion object {
-        private val DATABASE_VERSION = 4
+        private val DATABASE_VERSION = 7
         private val DATABASE_NAME = "productDB.db"
         val TABLE_SPOTS = "spots"
         val COLUMN_ID = "_id"
@@ -136,6 +155,7 @@ class MyDBHandler(context: Context,
         val COLUMN_SPOTYPE = "spottype"
         val COLUMN_SPOTNUM = "spotnum"
         val COLUMN_RATING = "rating"
+        val COLUMN_IMG = "image"
         val COLUMN_LAT = "lat"
         val COLUMN_LNG = "lng"
     }

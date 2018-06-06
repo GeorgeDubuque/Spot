@@ -3,6 +3,13 @@ package com.georgedubuque.spot
 import com.google.android.gms.maps.model.LatLng
 import java.io.Serializable
 
+/*
+purpose:    holds information about a spot including location, id  in the database, img path and
+            other relevant spot information. Spots do not have images yet. I will be adding camera
+            functionality in the next version of the application and images of all the spots will
+            need to be stored.
+ */
+
 class Spot : Serializable {
 
 

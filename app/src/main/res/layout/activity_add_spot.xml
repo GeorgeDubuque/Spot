@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".AddSpot">
 
     <ImageView
         android:id="@+id/spot_img"
         android:layout_width="0dp"
         android:layout_height="253dp"
+        android:src="@drawable/map_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_launcher_background" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_edit"
@@ -24,8 +25,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/gray"
         android:fontFamily="@font/roboto_thin"
         android:text="Edit"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -42,8 +45,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/gray"
         android:fontFamily="@font/roboto_thin"
         android:text="Delete"
+        android:textColor="@android:color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,15 +74,23 @@
 
             <EditText
                 android:id="@+id/spot_name"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="72dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:ems="10"
                 android:fontFamily="@font/roboto_thin"
+                android:hint="Spot Name"
                 android:inputType="textPersonName"
-                android:text="Spot Name"
+                android:textCursorDrawable="@null"
+
+                android:shadowColor="@color/colorPrimaryDark"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryDark"
+                android:textColorLink="@color/colorPrimaryDark"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:textSize="50sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +102,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:numStars="5"
-                android:stepSize=".5" />
+                android:stepSize=".5"
+                android:theme="@style/RatingBar" />
 
             <Spinner
                 android:id="@+id/spot_type"
@@ -97,6 +111,9 @@
                 android:layout_height="57dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
+                android:contentDescription="Spot Type"
+                android:spinnerMode="dialog"
+                android:backgroundTint="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spot_name" />
@@ -119,5 +136,18 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp"
         app:layout_constraintGuide_percent=".5" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/button_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/spot_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
 
 </android.support.constraint.ConstraintLayout>

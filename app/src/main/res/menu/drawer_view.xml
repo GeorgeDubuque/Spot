@@ -2,26 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.app" >
+    tools:context="com.example.app"
+    >
 
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@android:drawable/ic_menu_mapmode"
             android:title="Map" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@android:drawable/ic_menu_myplaces"
             android:title="Spots" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@android:drawable/ic_menu_help"
             android:title="Help" />
-        <item android:id="@+id/action_settings"
-            android:title="action_settings"
-            android:orderInCategory="100"
-            app:showAsAction="never" />
 
     </group>
 </menu>

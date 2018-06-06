@@ -4,24 +4,21 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.app.Fragment
+import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.georgedubuque.spot.R.layout.fragment_spot_list_item
 import kotlinx.android.synthetic.main.activity_add_spot.*
+import kotlinx.android.synthetic.main.activity_add_spot.view.*
 import kotlinx.android.synthetic.main.fragment_spot_list_item.*
 import kotlinx.android.synthetic.main.fragment_spot_list_item.view.*
 
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [SpotListItem.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [SpotListItem.newInstance] factory method to
- * create an instance of this fragment.
+/*
+purpose:    fragment that displays spot list item. displays spot name, type, image and rating.
  */
+
 class SpotListItem : Fragment(){
 
     // TODO: Rename and change types of parameters
@@ -43,6 +40,7 @@ class SpotListItem : Fragment(){
 
             spotName = spot.name
             spotType = spot.type
+            spotImg = spot.img
             spotRating = spot.rating.toString()
             //TODO: implement taking picture of spot and storing before manipulating fragment image
             //spotImg = spot.img
@@ -53,17 +51,14 @@ class SpotListItem : Fragment(){
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_spot_list_item, container, false)
-        view.spot_name.text = spotName
-        view.spot_type.text = spotType
-        view.spot_rating.rating = spotRating.toFloat()
-        return view
-    }
+        view.spot_list_name.text = spotName
+        view.spot_list_type.text = spotType
+        if(spotImg.isNotEmpty()){
 
-     //TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null) {
-            mListener!!.onFragmentInteraction(uri)
+            view.spot_list_image.setImageDrawable(Drawable.createFromPath(spotImg))
         }
+        view.spot_list_rating.rating = spotRating.toFloat()
+        return view
     }
 
     override fun onAttach(context: Context) {
@@ -83,33 +78,13 @@ class SpotListItem : Fragment(){
         mListener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
     interface OnFragmentInteractionListener  {
-        // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
         private val ARG_SPOT = "param1"
 
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SpotListItem.
-         */
-
-        // TODO: Rename and change types and number of parameters
         fun newInstance(spot: Spot): SpotListItem {
             val fragment = SpotListItem()
             val args = Bundle()
